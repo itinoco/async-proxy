@@ -39,6 +39,7 @@ module AsyncProxy
         if (!defined?(RUBY_ENGINE) || "ruby" == RUBY_ENGINE) && RUBY_VERSION < '1.9'
           Timeout.timeout(options[:timeout]){wait_for_computation}
         else
+          require 'system_timer'
           SystemTimer.timeout_after(options[:timeout]){wait_for_computation}
         end
       else
